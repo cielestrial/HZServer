@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestCaseController {
 
     private final TestCaseRepository testCaseRepository;
+    private TestCaseService testCaseService;
 
-    public TestCaseController(TestCaseRepository testCaseRepository) {
+    public TestCaseController(TestCaseRepository testCaseRepository, TestCaseService testCaseService) {
         this.testCaseRepository = testCaseRepository;
+        this.testCaseService = testCaseService;
     }
 
     @GetMapping
@@ -45,9 +47,18 @@ public class TestCaseController {
 
     }
 
+    @PostMapping("/{id}/run")
+    @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8090", "https://yassoof.github.io" })
+    public ResponseEntity<Object> runTestCase(@PathVariable Long id) {
+        TestCase currentTestCase = testCaseRepository.findById(id).orElseThrow(RuntimeException::new);
+        String message = currentTestCase.toString();
+        testCaseService.broadcastTestCase(message);
+        return ResponseEntity.ok(message);
+    }
+
     @PutMapping("/{id}")
     @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8090", "https://yassoof.github.io" })
-    public ResponseEntity<TestCase> updateClient(@PathVariable Long id, @RequestBody TestCase testCase) {
+    public ResponseEntity<Object> updateClient(@PathVariable Long id, @RequestBody TestCase testCase) {
         TestCase currentTestCase = testCaseRepository.findById(id).orElseThrow(RuntimeException::new);
         currentTestCase.setDescription(testCase.getDescription());
         currentTestCase.setPreConditions(testCase.getPreConditions());

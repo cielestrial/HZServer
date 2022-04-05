@@ -277,11 +277,18 @@
                 <multicast-group>224.2.2.3</multicast-group>
                 <multicast-port>54327</multicast-port>
             </multicast>
-            <tcp-ip enabled="true">
+            <tcp-ip enabled="false">
                 <member-list>
                     
                 </member-list>
-            </tcp-ip>            
+            </tcp-ip>  
+                  <!-- activate the Heroku DNS Discovery -->
+            <discovery-strategies>
+                <discovery-strategy
+                    enabled="true"
+                    class="com.github.jkutner.hazelcast.HerokuDiscoveryStrategy">
+                </discovery-strategy>
+            </discovery-strategies>          
         </join>
         <interfaces enabled="false">
             <interface>10.10.1.*</interface>
@@ -1277,9 +1284,6 @@
     <topic name="default">
         <global-ordering-enabled>true</global-ordering-enabled>
         <statistics-enabled>true</statistics-enabled>
-        <message-listeners>
-            <message-listener>com.hazelcast.examples.MessageListener</message-listener>
-        </message-listeners>
     </topic>
     <!--
         ===== HAZELCAST RELIABLE TOPIC CONFIGURATION =====
@@ -1352,16 +1356,11 @@
                 The caller will wait until there is space in the Ringbuffer.
             - ERROR:
                 The publish call fails immediately.
-        * <message-listeners>:
-            Adds listeners (listener classes) for the Reliable Topic messages using its sub-element <message-listener>.
     -->
     <reliable-topic name="default">
         <statistics-enabled>true</statistics-enabled>
         <topic-overload-policy>ERROR</topic-overload-policy>
         <read-batch-size>10</read-batch-size>
-        <message-listeners>
-            <message-listener>com.hazelcast.examples.MessageListener</message-listener>
-        </message-listeners>
     </reliable-topic>
 
     <!--
@@ -2074,8 +2073,8 @@
             By default, metrics are collected every 5 seconds.
 
     -->
-    <metrics enabled="false">
-        <management-center enabled="false">
+    <metrics enabled="true">
+        <management-center enabled="true">
             <retention-seconds>30</retention-seconds>
         </management-center>
         <jmx enabled="false"/>

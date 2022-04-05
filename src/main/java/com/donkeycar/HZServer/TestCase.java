@@ -13,6 +13,7 @@ public class TestCase {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+
     private String description;
 
     private String preConditions;
@@ -60,20 +61,10 @@ public class TestCase {
         this.postConditions = postConditions;
     }
 
-    /*
-     * @Override
-     * public String toString() {
-     * String output = description + ";";
-     * for (String string : preConditions) {
-     * output += string + ",";
-     * }
-     * StringUtils.chop(output);
-     * output += ";";
-     * for (String string : postConditions) {
-     * output += string + ",";
-     * }
-     * StringUtils.chop(output);
-     * return output;
-     * }
-     */
+    
+    @Override
+    public String toString() {
+        String output = id + ";" + description + ";" + preConditions + ";" + postConditions;
+        return output;
+    }
 }
