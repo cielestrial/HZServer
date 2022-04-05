@@ -21,6 +21,6 @@ public class LoggingController {
         logger.warn("A WARN Message");
         logger.error("An ERROR Message");
 
-        return "Check Logs to see the output...";
+        return "Welcome to the Donkey Car server.";
     }
 }
