@@ -24,6 +24,11 @@ public class TestCaseService {
         topic = instance.getReliableTopic("run");
         topic.publish(message);
         System.out.println("\nPublished: " + message + "\n");
+        for(int i = 0; i < instance.getCluster().getMembers().size(); i++) {
+            System.out.println("\n" +
+             instance.getCluster().getMembers().toArray()[i].toString()
+             + "\n");
+        }
     }
 
 }

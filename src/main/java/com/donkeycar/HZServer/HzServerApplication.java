@@ -17,7 +17,7 @@ public class HzServerApplication {
 		//config.setClusterName("Message Board");
         config.setClassLoader(Thread.currentThread().getContextClassLoader());
         Hazelcast.newHazelcastInstance(config);
-		Hazelcast.newHazelcastInstance(config);
+		//Hazelcast.newHazelcastInstance(config);
 	}
 
 }
