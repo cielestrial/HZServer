@@ -1357,10 +1357,9 @@
             - ERROR:
                 The publish call fails immediately.
     -->
-    <reliable-topic name="default">
+    <reliable-topic name="run">
         <statistics-enabled>true</statistics-enabled>
-        <topic-overload-policy>ERROR</topic-overload-policy>
-        <read-batch-size>10</read-batch-size>
+        <topic-overload-policy>BLOCK</topic-overload-policy>
     </reliable-topic>
 
     <!--
@@ -1405,25 +1404,11 @@
         * <ringbuffer-store>:
             Includes the Ringbuffer store factory class name and property configurations.
             The store format is the same as the in-memory-format for the Ringbuffer.
-        * <split-brain-protection-ref>:
-            Adds the Split Brain Protection for this data-structure which you configure
-            using the <split-brain-protection> element. You should set the
-            <split-brain-protection-ref>'s value as the <split-brain-protection>'s name.
     -->
-    <ringbuffer name="default">
-        <capacity>10000</capacity>
-        <time-to-live-seconds>0</time-to-live-seconds>
+    <ringbuffer name="run">
+        <capacity>1000</capacity>
+        <time-to-live-seconds>120</time-to-live-seconds>
         <backup-count>1</backup-count>
-        <async-backup-count>0</async-backup-count>
-        <in-memory-format>BINARY</in-memory-format>
-        <ringbuffer-store>
-            <class-name>com.hazelcast.RingbufferStoreImpl</class-name>
-            <properties>
-                <property name="prop1">prop1-value</property>
-                <property name="prop2">prop2-value</property>
-            </properties>
-        </ringbuffer-store>
-        <merge-policy>PutIfAbsentMergePolicy</merge-policy>
     </ringbuffer>
 
     <!--
