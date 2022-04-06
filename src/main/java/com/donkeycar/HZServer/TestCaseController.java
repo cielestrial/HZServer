@@ -27,16 +27,19 @@ public class TestCaseController {
         this.testCaseService = testCaseService;
     }
 
+    @CrossOrigin
     @GetMapping
     public List<TestCase> getTestCases() {
         return testCaseRepository.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public TestCase getTestCase(@PathVariable Long id) {
         return testCaseRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<TestCase> postTestCase(@RequestBody TestCase testCase) throws URISyntaxException {
         TestCase savedCase = testCaseRepository.save(testCase);
@@ -44,6 +47,7 @@ public class TestCaseController {
 
     }
 
+    @CrossOrigin
     @PostMapping("/{id}/run")
     public ResponseEntity<Object> runTestCase(@PathVariable Long id) {
         TestCase currentTestCase = testCaseRepository.findById(id).orElseThrow(RuntimeException::new);
@@ -52,6 +56,7 @@ public class TestCaseController {
         return ResponseEntity.ok(testCaseService.broadcastMessageResponse());
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateClient(@PathVariable Long id, @RequestBody TestCase testCase) {
         TestCase currentTestCase = testCaseRepository.findById(id).orElseThrow(RuntimeException::new);
@@ -63,6 +68,7 @@ public class TestCaseController {
         return ResponseEntity.ok(currentTestCase);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteTestCase(@PathVariable Long id) {
         testCaseRepository.deleteById(id);
