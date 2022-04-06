@@ -38,7 +38,7 @@
         Specifies the cluster name. It allows creating separate sub-clusters with different names.
         The name is also referenced in the WAN Replication configuration.
     -->
-    <cluster-name>my-cluster</cluster-name>
+    <cluster-name>dev</cluster-name>
    
     <!--
         When Hazelcast instances are created, they are put in a global registry with their creation names.
@@ -272,7 +272,7 @@
         </outbound-ports>
         <reuse-address>true</reuse-address>
         <join>
-            <auto-detection enabled="false"/>
+            <auto-detection enabled="true"/>
             <multicast enabled="false">
                 <multicast-group>224.2.2.3</multicast-group>
                 <multicast-port>54327</multicast-port>
