@@ -53,7 +53,7 @@ public class TestCaseController {
         TestCase currentTestCase = testCaseRepository.findById(id).orElseThrow(RuntimeException::new);
         String message = currentTestCase.toString();
         testCaseService.broadcastTestCase(message);
-        return ResponseEntity.ok(message);
+        return ResponseEntity.ok(testCaseService.broadcastMessageResponse());
     }
 
     @PutMapping("/{id}")

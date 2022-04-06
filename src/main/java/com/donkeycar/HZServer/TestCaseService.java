@@ -5,6 +5,7 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.topic.ITopic;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,11 +25,18 @@ public class TestCaseService {
         topic = instance.getReliableTopic("run");
         topic.publish(message);
         System.out.println("\nPublished: " + message + "\n");
+        
+    }
+
+    public String broadcastMessageResponse() {
+        String responseMessage = "";
         for(int i = 0; i < instance.getCluster().getMembers().size(); i++) {
-            System.out.println("\n" +
+            responseMessage +=
              instance.getCluster().getMembers().toArray()[i].toString()
-             + "\n");
+             + ";";
         }
+        StringUtils.chop(responseMessage);
+        return responseMessage;
     }
 
 }
