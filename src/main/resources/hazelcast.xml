@@ -266,6 +266,7 @@
             default of 0 is usually sufficient.
     -->
     <network>
+        <public-address>11.22.33.44:5555</public-address>
         <port auto-increment="true" port-count="100">5701</port>
         <outbound-ports>
             <ports>34500</ports>
