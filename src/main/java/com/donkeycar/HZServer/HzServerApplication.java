@@ -14,7 +14,7 @@ public class HzServerApplication {
 
 		SpringApplication.run(HzServerApplication.class, args);
 		Config config = new Config();
-		config.setClusterName("Message Board");
+		//config.setClusterName("Message Board");
         config.setClassLoader(Thread.currentThread().getContextClassLoader());
         Hazelcast.newHazelcastInstance(config);
 		Hazelcast.newHazelcastInstance(config);

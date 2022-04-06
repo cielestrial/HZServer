@@ -15,7 +15,7 @@ public class TestCaseService {
 
     public TestCaseService() {
         Config config = new Config();
-		config.setClusterName("Message Board");
+		//config.setClusterName("Message Board");
         config.setClassLoader(Thread.currentThread().getContextClassLoader());
         this.instance = Hazelcast.newHazelcastInstance(config);
     }
