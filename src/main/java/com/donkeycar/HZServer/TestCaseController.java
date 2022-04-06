@@ -28,19 +28,19 @@ public class TestCaseController {
     }
 
     @GetMapping
-    @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8090", "https://yassoof.github.io", "https://donkey-car.herokuapp.com"})
+    @CrossOrigin
     public List<TestCase> getTestCases() {
         return testCaseRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8090", "https://yassoof.github.io", "https://donkey-car.herokuapp.com" })
+    @CrossOrigin
     public TestCase getTestCase(@PathVariable Long id) {
         return testCaseRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     @PostMapping
-    @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8090", "https://yassoof.github.io", "https://donkey-car.herokuapp.com" })
+    @CrossOrigin
     public ResponseEntity<TestCase> postTestCase(@RequestBody TestCase testCase) throws URISyntaxException {
         TestCase savedCase = testCaseRepository.save(testCase);
         return ResponseEntity.created(new URI("/test-cases/" + savedCase.getId())).body(savedCase);
@@ -48,7 +48,7 @@ public class TestCaseController {
     }
 
     @PostMapping("/{id}/run")
-    @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8090", "https://yassoof.github.io", "https://donkey-car.herokuapp.com" })
+    @CrossOrigin
     public ResponseEntity<Object> runTestCase(@PathVariable Long id) {
         TestCase currentTestCase = testCaseRepository.findById(id).orElseThrow(RuntimeException::new);
         String message = currentTestCase.toString();
@@ -57,7 +57,7 @@ public class TestCaseController {
     }
 
     @PutMapping("/{id}")
-    @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8090", "https://yassoof.github.io", "https://donkey-car.herokuapp.com" })
+    @CrossOrigin
     public ResponseEntity<Object> updateClient(@PathVariable Long id, @RequestBody TestCase testCase) {
         TestCase currentTestCase = testCaseRepository.findById(id).orElseThrow(RuntimeException::new);
         currentTestCase.setDescription(testCase.getDescription());
@@ -69,7 +69,7 @@ public class TestCaseController {
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:8090", "https://yassoof.github.io", "https://donkey-car.herokuapp.com" })
+    @CrossOrigin
     public ResponseEntity<Object> deleteTestCase(@PathVariable Long id) {
         testCaseRepository.deleteById(id);
         return ResponseEntity.ok().build();
