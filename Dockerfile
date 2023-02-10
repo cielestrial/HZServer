@@ -18,5 +18,6 @@ RUN mvn clean package -DskipTests
 FROM openjdk:13-jdk-slim
 COPY --from=build /target/HZServer-0.0.1-SNAPSHOT.jar hzserver.jar
 # ENV PORT=8080
-EXPOSE 8080
+#EXPOSE 5701 5702
+EXPOSE 8080 5701 5702
 ENTRYPOINT ["java","-jar","hzserver.jar"]
